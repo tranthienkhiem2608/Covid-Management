@@ -1,0 +1,111 @@
+{{#each patients}}
+<div class="modal" id="addRelatedPatient{{Id}}" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add Related Person</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-10 mx-auto text-center">
+                            <div class="alert alert-danger" role="alert" id="MessageValidateRelated{{Id}}"></div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="NameRelated{{Id}}">Name</label>
+                            <input type="text" class="form-control" id="NameRelated{{Id}}" name="name" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="IdNumberRelated{{Id}}">Identity card number</label>
+                            <input type="text" class="form-control" id="IdNumberRelated{{Id}}" name="idNumber" required>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="Year">Year of Birth</label>
+                            <input type="number" min="1900" max="2021" class="form-control" id="Year" name="year"
+                                required>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputPassword4">Status</label>
+                            {{#ifStr Status 0}}
+                            <select id="inputStatus" name="status" class="form-control">
+                                <option value="1">F1</option>
+                                <option value="2">F2</option>
+                                <option value="3">F3</option>
+                            </select>
+                            {{/ifStr}}
+                            {{#ifStr Status 1}}
+                            <select id="inputStatus" name="status" class="form-control">
+                                <option value="2">F2</option>
+                                <option value="3">F3</option>
+                            </select>
+                            {{/ifStr}}
+                            {{#ifStr Status 2}}
+                            <select id="inputStatus" name="status" class="form-control">
+                                <option value="3">F3</option>
+                            </select>
+                            {{/ifStr}}
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-row my-0">
+                        <div class="form-group col-md-12 my-0">
+                            <h4>Accommodation</h4>
+                        </div>
+                    </div>
+                    <div class="form-row border rounded mb-1">
+                        <div class="form-group col-md-4 ">
+                            <label for="inputEmail4">Province/city</label>
+                            <select id="inputState" class="form-control" name="province">
+                                {{#each ../provinces}}
+                                <option value={{Id}}>{{NameProvince}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputPassword4">District</label>
+                            <select id="inputState" class="form-control" name="district">
+                                <option selected>Choose...</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputPassword4">Wards</label>
+                            <select id="inputState" class="form-control" name="ward">
+                                <option selected>Choose...</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-row my-0">
+                        <div class="form-group col-md-12 my-0">
+                            <h4>Isolation place</h4>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-10">
+                            <select id="inputPlace" class="form-control" name="place">
+
+                                {{#each ../isolation}}
+                                <option value={{Id}}>{{NamePlace}}</option>
+                                {{/each}}
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" formmethod="post"
+                        formaction="/manager/patients/addRelated/{{Id}}">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{/each}}
